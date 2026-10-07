@@ -140,8 +140,9 @@ class AuthController extends Controller
 
                 if ($response->successful()) {
                     $data = $response->json();
+                    $userObj = $data['user'] ?? $data;
                     session([
-                        'supabase_user' => $data['user'] ?? null,
+                        'supabase_user' => $userObj,
                         'supabase_token' => $data['access_token'] ?? null,
                     ]);
                     $request->session()->regenerate();
